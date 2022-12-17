@@ -13,3 +13,6 @@ class Player:
     def add_item(self, item):
         self.items.append(item)
 
+    # TODO: Maybe add remove_mon function
+
+

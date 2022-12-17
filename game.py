@@ -17,6 +17,7 @@ MOVES_DF = pandas.read_csv("static/data/moves.csv")
 
 game_on = True
 STARTERS = ["Bulbasaur", "Charmander", "Squirtle", "Pikachu", "Spinda", "Ekans", "Clefairy"]
+NAMES = ["Bob", "Jill", "Joe", "Cynthia", "Spike", "Lance", "Ash", "Misty", "Brock", "Dawn"]
 
 # Load players into ALL_PLAYERS from pickle file
 with open('static/data/player_list.pkl', 'rb') as inp:
@@ -79,6 +80,11 @@ def make_player(name):
     save_players()
     return new_player
 
+def make_enemy():
+    new_enemy = Player(random.choice(NAMES))
+
+    return new_enemy
+
 # Shows all players
 def display_players():
     for player in all_players:
@@ -124,21 +130,40 @@ def delete_player(player):
 
 
 
-
+# Step 1: Game starts
 while game_on:
     current_player = ''
-    command = input("What do?")
+    # Step 2: Choose player, make new player, delete player
+    command = input("(1) Choose a player, (2) make a new player or (3) delete a player?")
     match command:
         case '1':
-            display_players()
+            print('Choose a player: ')
+            # display_players()
+            player_list_str = ''
+            for i in range(len(all_players)):
+                print(f'({i+1}) {all_players[i].name}')
+
+            player_select = input('')
+            if int(player_select) not in range(len(all_players) + 1):
+                print("Invalid player choice.")
+            else:
+                # print(f'{player_select} and {int(player_select) - 1}')
+                battle_on = True
+                active_player = all_players[int(player_select) - 1]
+                # Step 3: Player Battle Loop
+                while battle_on:
+                    print(f'Player {active_player.name} is battling. ')
+                    # Roll random enemy player:
+
+                    battle_on = False
 
         case '2':
-            print('case 2')
+            print('Make a new player: ')
 
         case '3':
-            print('case3')
+            print('Delete a player: ')
 
         # Catch everything else
         case other:
-            print(f'the command was: {command}')
+            print(f'Invalid Command: {command}')
 
