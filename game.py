@@ -21,7 +21,8 @@ ENEMY_STARTERS = ["Pidgey","Ekans","Paras","Meowth","Abra","Growlithe","Tentacoo
 NAMES = ["Bob", "Jill", "Joe", "Cynthia", "Spike", "Lance", "Ash", "Misty", "Brock", "Dawn"]
 MON_POOL1 = ["Pidgey", "Caterpie","Metapod","Rattata","Weedle","NidoranF","NidoranM","Spearow","Jigglypuff","Sandshrew",
              "Mankey","Oddish","Bellsprout","Meowth"]
-MON_POOL2 = []
+MON_POOL2 = ["Exeggcute","Seel","Goldeen","Koffing","Pidgeotto","Kabuto","Beedrill","Butterfree","Lickitung","Nidorino",
+             "Nidorina","Rhyhorn","Gloom","Ponyta","Poliwhirl","Onix","Hitmonlee","Arbok","Raichu"]
 
 # Load players into ALL_PLAYERS from pickle file
 with open('static/data/player_list.pkl', 'rb') as inp:
