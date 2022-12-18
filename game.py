@@ -16,14 +16,18 @@ MOVES_DF = pandas.read_csv("static/data/moves.csv")
 # MOVE_CATEGORIES = ['move', 'description', 'type', 'category', 'power', 'accuracy', 'pp', 'z-effect']
 
 game_on = True
-STARTERS = ["Bulbasaur", "Charmander", "Squirtle", "Pikachu", "Spinda", "Ekans", "Clefairy"]
+STARTERS = ["Bulbasaur", "Charmander", "Squirtle", "Pikachu", "Spinda", "Vulpix", "Clefairy"]
+ENEMY_STARTERS = ["Pidgey","Ekans","Paras","Meowth","Abra","Growlithe","Tentacool","Voltorb","Onix","Tangela","Machop"]
 NAMES = ["Bob", "Jill", "Joe", "Cynthia", "Spike", "Lance", "Ash", "Misty", "Brock", "Dawn"]
+MON_POOL1 = ["Pidgey", "Caterpie","Metapod","Rattata","Weedle","NidoranF","NidoranM","Spearow","Jigglypuff","Sandshrew",
+             "Mankey","Oddish","Bellsprout","Meowth"]
+MON_POOL2 = []
 
 # Load players into ALL_PLAYERS from pickle file
 with open('static/data/player_list.pkl', 'rb') as inp:
     all_players = pickle.load(inp)
 
-def make_mon(name):
+def make_mon(name, level):
     # Find all moves in first x that are not null value
     moveset2 = MOVESET_DF.loc[MOVESET_DF['species'] == name].to_dict(orient="list")
     move_list = []
@@ -55,7 +59,7 @@ def make_mon(name):
     mon_df = POKEMONS_DF.loc[POKEMONS_DF['species'] == name].to_dict(orient="list")
     new_pokemon = Pokemon(
         name= mon_df['species'][0],
-        level= 1,
+        level= level,
         type1= mon_df['type1'][0],
         type2= mon_df['type2'][0],
         hp= mon_df['hp'][0],
@@ -72,16 +76,19 @@ def make_mon(name):
 # Function that will make a new player
 def make_player(name):
     new_player = Player(name)
-    new_pokemon1 = make_mon(random.choice(STARTERS))
-    new_player.add_mon(new_pokemon1)
-    new_pokemon2 = make_mon(random.choice(STARTERS))
-    new_player.add_mon(new_pokemon2)
+    for x in range(2):
+        new_pokemon = make_mon(random.choice(STARTERS), 1)
+        new_player.add_mon(new_pokemon)
+
     all_players.append(new_player)
     save_players()
     return new_player
 
-def make_enemy():
+def make_enemy(count, level):
     new_enemy = Player(random.choice(NAMES))
+    for x in range(count):
+        new_pokemon = make_mon(random.choice(ENEMY_STARTERS), level)
+        new_enemy.add_mon(new_pokemon)
 
     return new_enemy
 
@@ -147,14 +154,45 @@ while game_on:
             if int(player_select) not in range(len(all_players) + 1):
                 print("Invalid player choice.")
             else:
-                # print(f'{player_select} and {int(player_select) - 1}')
                 battle_on = True
                 active_player = all_players[int(player_select) - 1]
                 # Step 3: Player Battle Loop
                 while battle_on:
                     print(f'Player {active_player.name} is battling. ')
                     # Roll random enemy player:
+                    enemy_trainer = make_enemy(2, 1)
 
+                    # TODO: Display the enemy trainers mons:
+
+                    # item_str = ''
+                    # for item in enemy_trainer.items:
+                    #     item_str += f'{item} '
+                    # output_str = f'Player: {enemy_trainer.name} | Badges: {enemy_trainer.badges} | Items: {item_str}\n'
+                    # pokemon_count = 1
+                    # for mon in enemy_trainer.pokemons:
+                    #     output_str += f'Pokemon #{pokemon_count}: {mon.name} - ' \
+                    #                   f'Lv: {mon.level}\n' \
+                    #                   f'Type: {mon.type1}/{mon.type2}\n' \
+                    #                   f'Stats: |{mon.hp} hp|{mon.atk} atk|{mon.defense} def|{mon.spatk} spatk|{mon.spdef} spdef|{mon.spd} spd|' \
+                    #                   f'\n\t'
+                    #     pokemon_count += 1
+                    #
+                    #     for move in mon.curr_moves:
+                    #         output_str += f'{move.name} - '
+                    #     # Remove trailing ' - '
+                    #     output_str = output_str[:-3] + '\n\n'
+                    # print(output_str)
+
+
+
+
+                    # Loop through enemy players pokemons:
+
+                        # Loop player battle choice:
+
+
+
+                    # Quit:
                     battle_on = False
 
         case '2':
