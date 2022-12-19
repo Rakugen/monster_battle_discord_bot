@@ -99,7 +99,8 @@ def display_players():
         item_str = ''
         for item in player.items:
             item_str += f'{item} '
-        output_str = f'Player: {player.name} | Badges: {player.badges} | Items: {item_str}\n'
+        output_str = '===================================================\n'
+        output_str += f'Player: {player.name} | Badges: {player.badges} | Items: {item_str}\n'
         pokemon_count = 1
         for mon in player.pokemons:
             output_str += f'Pokemon #{pokemon_count}: {mon.name} - ' \
@@ -112,8 +113,9 @@ def display_players():
             for move in mon.curr_moves:
                 output_str += f'{move.name} - '
             # Remove trailing ' - '
-            output_str = output_str[:-3] + '\n\n'
+            output_str = output_str[:-3]
 
+        output_str += '\n==================================================='
         print(output_str)
 
 # Saves ALL_PLAYERS into pickle file
@@ -142,7 +144,7 @@ def delete_player(player):
 while game_on:
     current_player = ''
     # Step 2: Choose player, make new player, delete player
-    command = input("(1) Choose a player, (2) make a new player or (3) delete a player?")
+    command = input("(1) Choose Player, (2) New Player (3) Delete Player (4) View Players")
     match command:
         case '1':
             if len(all_players) == 0:
@@ -199,9 +201,9 @@ while game_on:
                         battle_on = False
 
         case '2':
-            print('Make a new player: ')
-
-
+            player_name = input("Enter a player name: ")
+            make_player(player_name)
+            display_players()
 
         case '3':
             print('Delete a player: ')
@@ -220,6 +222,8 @@ while game_on:
                 else:
                     print(f'Deleting: {player_select} | {all_players[int(player_select)-1].name}')
                     delete_player(all_players[int(player_select)-1])
+        case '4':
+            display_players()
 
         # Catch everything else
         case other:
