@@ -145,62 +145,81 @@ while game_on:
     command = input("(1) Choose a player, (2) make a new player or (3) delete a player?")
     match command:
         case '1':
-            print('Choose a player: ')
-            # display_players()
-            player_list_str = ''
-            for i in range(len(all_players)):
-                print(f'({i+1}) {all_players[i].name}')
-
-            player_select = input('')
-            if int(player_select) not in range(len(all_players) + 1):
-                print("Invalid player choice.")
+            if len(all_players) == 0:
+                print("No Players Available.")
             else:
-                battle_on = True
-                active_player = all_players[int(player_select) - 1]
-                # Step 3: Player Battle Loop
-                while battle_on:
-                    print(f'Player {active_player.name} is battling. ')
-                    # Roll random enemy player:
-                    enemy_trainer = make_enemy(2, 1)
+                print('Choose a player: ')
+                player_list_str = ''
+                for i in range(len(all_players)):
+                    print(f'({i+1}) {all_players[i].name}')
 
-                    # TODO: Display the enemy trainers mons:
+                player_select = input('')
+                if int(player_select) not in range(len(all_players) + 1):
+                    print("Invalid player choice.")
+                else:
+                    battle_on = True
+                    active_player = all_players[int(player_select) - 1]
+                    # Step 3: Player Battle Loop
+                    while battle_on:
+                        print(f'Player {active_player.name} is battling. ')
+                        # Roll random enemy player:
+                        enemy_trainer = make_enemy(2, 1)
 
-                    # item_str = ''
-                    # for item in enemy_trainer.items:
-                    #     item_str += f'{item} '
-                    # output_str = f'Player: {enemy_trainer.name} | Badges: {enemy_trainer.badges} | Items: {item_str}\n'
-                    # pokemon_count = 1
-                    # for mon in enemy_trainer.pokemons:
-                    #     output_str += f'Pokemon #{pokemon_count}: {mon.name} - ' \
-                    #                   f'Lv: {mon.level}\n' \
-                    #                   f'Type: {mon.type1}/{mon.type2}\n' \
-                    #                   f'Stats: |{mon.hp} hp|{mon.atk} atk|{mon.defense} def|{mon.spatk} spatk|{mon.spdef} spdef|{mon.spd} spd|' \
-                    #                   f'\n\t'
-                    #     pokemon_count += 1
-                    #
-                    #     for move in mon.curr_moves:
-                    #         output_str += f'{move.name} - '
-                    #     # Remove trailing ' - '
-                    #     output_str = output_str[:-3] + '\n\n'
-                    # print(output_str)
+                        # TODO: Display the enemy trainers mons:
+
+                        # item_str = ''
+                        # for item in enemy_trainer.items:
+                        #     item_str += f'{item} '
+                        # output_str = f'Player: {enemy_trainer.name} | Badges: {enemy_trainer.badges} | Items: {item_str}\n'
+                        # pokemon_count = 1
+                        # for mon in enemy_trainer.pokemons:
+                        #     output_str += f'Pokemon #{pokemon_count}: {mon.name} - ' \
+                        #                   f'Lv: {mon.level}\n' \
+                        #                   f'Type: {mon.type1}/{mon.type2}\n' \
+                        #                   f'Stats: |{mon.hp} hp|{mon.atk} atk|{mon.defense} def|{mon.spatk} spatk|{mon.spdef} spdef|{mon.spd} spd|' \
+                        #                   f'\n\t'
+                        #     pokemon_count += 1
+                        #
+                        #     for move in mon.curr_moves:
+                        #         output_str += f'{move.name} - '
+                        #     # Remove trailing ' - '
+                        #     output_str = output_str[:-3] + '\n\n'
+                        # print(output_str)
 
 
 
 
-                    # Loop through enemy players pokemons:
+                        # Loop through enemy players pokemons:
 
-                        # Loop player battle choice:
+                            # Loop player battle choice:
 
 
 
-                    # Quit:
-                    battle_on = False
+                        # Quit:
+                        battle_on = False
 
         case '2':
             print('Make a new player: ')
 
+
+
         case '3':
             print('Delete a player: ')
+            player_list_str = ''
+
+            for i in range(len(all_players)):
+                print(f'({i+1}) {all_players[i].name}')
+
+            if len(all_players) == 0:
+                print("No Players to Delete.")
+            else:
+                player_select = input('')
+
+                if int(player_select) not in range(len(all_players) + 1):
+                    print("Invalid player choice.")
+                else:
+                    print(f'Deleting: {player_select} | {all_players[int(player_select)-1].name}')
+                    delete_player(all_players[int(player_select)-1])
 
         # Catch everything else
         case other:

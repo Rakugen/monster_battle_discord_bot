@@ -17,6 +17,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\static\data\natures.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\static\data\pokedex_(Update_05.20).csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\static\data\pokemon.csv">
           <value>
             <Attribute>
